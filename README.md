@@ -42,7 +42,7 @@ $ make migrate-generate name=SomeMigrationName
 $ make migrate
 
 # revert previous migration
-$ make migrate
+$ make migrate-revert
 ```
 
 We use a `pgadmin` image to enable you to view database in a UI.
