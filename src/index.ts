@@ -1,30 +1,23 @@
-const axios = require('axios');
-import { Message } from "./interfaces";
+import "reflect-metadata";
+const express = require('express')
+import { Request, Response } from 'express';
+import { sendMessage } from "./service/sendMessage";
+import { Message, SendMessageResult } from './interfaces';
+import { createDbConnection } from './db/db';
 
-const message: Message = {
-    from: "Tom",
-    message: "let's grab a :beer:",
-    to: process.env.MOBILE_NUMBER,
-}
+createDbConnection();
+const app = express();
+const PORT = process.env.PORT || 3030;
+app.use(express.json());
 
-// API: https://m3o.com/emoji 
-
-const sendMessage = async (message: Message): Promise<void> => {
-    if (!message.to) {
-        return;
+app.post('/', async function (req: Request, res: Response) {
+    if (req && req.body) {
+        const { body }: { body: Message} = req;
+        const messageResult: SendMessageResult = await sendMessage(body);
+        res.send(messageResult);
     }
-    
-    await axios({
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.M3O_API_TOKEN}`
-        },
-        url: process.env.M3O_API_URL,
-        data: message,
-      });
+});
 
-      console.log(`Sent this message to ${message.to}`);
-}
-
-sendMessage(message);
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
+});

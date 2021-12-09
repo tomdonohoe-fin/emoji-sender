@@ -3,3 +3,10 @@ export interface Message {
     message: string;
     to: string | undefined;
 }
+
+export interface SendMessageResult {
+    isSuccessful: boolean;
+    messageSent?: string;
+    messageSentTo?: string;
+    errorMessage?: string;
+}
