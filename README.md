@@ -48,7 +48,7 @@ $ make migrate
 We use a `pgadmin` image to enable you to view database in a UI.
 
 To use go to localhost:8080, login with:
-- (u) `admin@gmail.com`
+- (u) `admin@linuxhint.com`
 - (p) `secret`
 
 When connecting a DB server, this command can be helpful to find DB IP address:
