@@ -1,5 +1,8 @@
 APP_NAME=emoji-sender-api
 COMPOSE=docker-compose -p emoji-sender
+DB_SERVICE=postgres
+DB_USER=admin
+DB_NAME=emoji_sender_api
 
 ###################################
 # Docker
@@ -36,3 +39,14 @@ migrate:
 migrate-revert:
 	$(COMPOSE) run --rm --entrypoint=sh $(APP_NAME) -c 'yarn run migration:revert'
 .PHONY: migrate-generate
+
+create-database: 
+	docker exec postgres psql -U $(DB_USER) postgres -c 'create database $(DB_NAME)'
+.PHONY: create-database
+
+drop-database:
+	docker exec postgres psql -U $(DB_USER) postgres -c 'drop database if exists $(DB_NAME)'
+.PHONY: drop-database
+
+recreate-database: drop-database create-database
+.PHONY: recreate-database

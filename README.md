@@ -25,6 +25,9 @@ $ yarn install
 # build containers
 $ make docker-build
 
+# create the database
+$ make create-database
+
 # start the application
 $ make docker-up
 
@@ -43,16 +46,19 @@ $ make migrate
 
 # revert previous migration
 $ make migrate-revert
+
+# Creates a brand new database in the running docker postgres.
+$ make create-database
+
+# Drops the database in the running docker postgres database
+$ make drop-database
+
+# Drops and recreates the database in the running docker postgres database
+$ make recreate-database
 ```
 
 We use a `pgadmin` image to enable you to view database in a UI.
 
 To use go to localhost:8080, login with:
-- (u) `admin@linuxhint.com`
+- (u) `docker@gmail.com`
 - (p) `secret`
-
-When connecting a DB server, this command can be helpful to find DB IP address:
-
-```bash
-$ docker inspect emoji-sender-db | grep IPAddress
-```
