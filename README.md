@@ -18,6 +18,8 @@ DB_NAME=emoji
 
 ## Get Started
 
+Setup this repo locally: `https://github.com/tomdonohoe-fin/docker`. Follow Readme instructions. Emoji-Sender-Api depends on it's DB network.
+
 ```bash
 # install dependencies locally.
 $ yarn install
